@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Creative Vues</string>
     <string name="join_now">Join Now</string>
+    <string name="join_today">Join Today</string>
 </resources>

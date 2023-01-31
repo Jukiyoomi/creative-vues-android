@@ -1,5 +1,6 @@
 package com.frite.creativevues;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -78,7 +79,8 @@ public class HeaderFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Button Clicked", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getActivity(), AuthActivity.class);
+                startActivity(i);
             }
         });
     }
