@@ -2,4 +2,6 @@
     <string name="app_name">Creative Vues</string>
     <string name="join_now">Join Now</string>
     <string name="join_today">Join Today</string>
+	<string name="post">Post</string>
+	<string name="avatar_desc">Avatar of logged user</string>
 </resources>
