@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "679842903143",
+    "firebase_url": "https://creative-vues-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "creative-vues",
+    "storage_bucket": "creative-vues.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679842903143:android:5175d1459813bad98bd0c2",
+        "android_client_info": {
+          "package_name": "com.frite.creativevues"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679842903143-tgkb52uard6oge3n9qfilfimpvgl9qak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr1_efiZoqv_7i5ADOLNnKT25ZQxzYNiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679842903143-tgkb52uard6oge3n9qfilfimpvgl9qak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
