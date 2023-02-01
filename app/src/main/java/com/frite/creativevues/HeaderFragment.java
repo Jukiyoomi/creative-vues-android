@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +32,7 @@ public class HeaderFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    TextView title;
     Button joinBtn;
     Button postBtn;
     ImageView avatar;
@@ -79,6 +81,7 @@ public class HeaderFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
+        title = view.findViewById(R.id.toolbar_title);
         joinBtn = view.findViewById(R.id.join_btn);
         postBtn = view.findViewById(R.id.post_btn);
         avatar = view.findViewById(R.id.profile_btn);
