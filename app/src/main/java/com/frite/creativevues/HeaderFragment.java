@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,8 +31,10 @@ public class HeaderFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    Button button;
-    TextView textView;
+    Button joinBtn;
+    Button postBtn;
+    ImageView avatar;
+    FirebaseAuth mAuth;
 
     public HeaderFragment() {
         // Required empty public constructor
@@ -74,15 +79,31 @@ public class HeaderFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        button = (Button) view.findViewById(R.id.join_btn);
+        joinBtn = view.findViewById(R.id.join_btn);
+        postBtn = view.findViewById(R.id.post_btn);
+        avatar = view.findViewById(R.id.profile_btn);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), AuthActivity.class);
                 startActivity(i);
             }
         });
+
+        mAuth = FirebaseAuth.getInstance();
+
+        // Initialize firebase user
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+        // Check condition
+        if(firebaseUser != null) {
+            Glide.with(this).load(firebaseUser.getPhotoUrl()).into(avatar);
+
+            joinBtn.setVisibility(View.INVISIBLE);
+            postBtn.setVisibility(View.VISIBLE);
+            avatar.setVisibility(View.VISIBLE);
+        }
     }
 
 }
