@@ -86,12 +86,19 @@ public class HeaderFragment extends Fragment {
         postBtn = view.findViewById(R.id.post_btn);
         avatar = view.findViewById(R.id.profile_btn);
 
-        joinBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), AuthActivity.class);
-                startActivity(i);
-            }
+        title.setOnClickListener(mainView -> {
+            Intent i = new Intent(getActivity(), MainActivity.class);
+            startActivity(i);
+        });
+
+        joinBtn.setOnClickListener(authView -> {
+            Intent i = new Intent(getActivity(), AuthActivity.class);
+            startActivity(i);
+        });
+
+        avatar.setOnClickListener(profileView -> {
+            Intent i = new Intent(getActivity(), ProfileActivity.class);
+            startActivity(i);
         });
 
         mAuth = FirebaseAuth.getInstance();
