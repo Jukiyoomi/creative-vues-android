@@ -7,7 +7,7 @@ public class DBProvider {
 
     private static final DBProvider instance = new DBProvider();
 
-    public DBProvider() {
+    private DBProvider() {
         this.db = FirebaseFirestore.getInstance();
     }
 
