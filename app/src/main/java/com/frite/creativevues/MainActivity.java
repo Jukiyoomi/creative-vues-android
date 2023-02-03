@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.frite.creativevues.db.DBProvider;
+import com.frite.creativevues.fragment.PostFragment;
 import com.frite.creativevues.model.PostModel;
 import com.frite.creativevues.model.TimestampModel;
 import com.google.firebase.Timestamp;
