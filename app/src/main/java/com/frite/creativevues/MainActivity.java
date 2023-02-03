@@ -38,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
                     ArrayList<PostModel> result = new ArrayList<>();
 
-                    if (value != null) {
-                        value.getDocuments().forEach(document -> {
-                            PostModel post = createPost(document);
-                            result.add(post);
-                        });
-                    }
+                    if (value == null) return;
+
+                    value.getDocuments().forEach(document -> {
+                        PostModel post = createPost(document);
+                        result.add(post);
+                    });
 
                     PostFragment postFragment = new PostFragment();
                     postFragment.setPosts(result);
