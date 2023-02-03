@@ -11,21 +11,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.frite.creativevues.db.CustomFirebaseAuth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 public class AuthActivity extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
-    private FirebaseAuth mAuth;
+    private CustomFirebaseAuth mAuth;
     SignInButton signInBtn;
     private static final String TAG = "AuthActivity";
 
@@ -49,7 +46,7 @@ public class AuthActivity extends AppCompatActivity {
             activityResultLauncher.launch(signInIntent);
         });
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = CustomFirebaseAuth.getInstance();
     }
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
@@ -67,41 +64,13 @@ public class AuthActivity extends AppCompatActivity {
                     {
                         Toast.makeText(AuthActivity.this, "Processing authentication", Toast.LENGTH_SHORT).show();
 
-                        try {
-                            // Initialize sign in account
-                            GoogleSignInAccount googleSignInAccount = signInAccountTask
-                                    .getResult(ApiException.class);
-
-                            if(googleSignInAccount != null) {
-                                // Initialize auth credential
-                                AuthCredential authCredential = GoogleAuthProvider
-                                        .getCredential(googleSignInAccount.getIdToken(),null);
-
-                                // Check credential
-                                checkCredential(authCredential);
-                            }
-                        }
-                        catch (ApiException e)
-                        {
-                            e.printStackTrace();
-                        }
+                        this.mAuth.initAuth(signInAccountTask, this, () ->
+                                startActivity(new Intent(AuthActivity.this, ProfileActivity.class)
+                                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)));
                     } else {
                         Log.d(TAG, "onActivityResult: " + signInAccountTask.getException());
                         Toast.makeText(AuthActivity.this, "Google sign in failed", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
-
-    private void checkCredential(AuthCredential authCredential) {
-        mAuth.signInWithCredential(authCredential)
-                .addOnCompleteListener(this, task -> {
-                    if(task.isSuccessful()) {
-                        Toast.makeText(AuthActivity.this, "Firebase authentication successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(AuthActivity.this, ProfileActivity.class)
-                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                    } else {
-                        Toast.makeText(AuthActivity.this, "Firebase authentication failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
 }

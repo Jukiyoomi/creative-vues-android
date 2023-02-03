@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.frite.creativevues.db.DBProvider;
+import com.frite.creativevues.fragment.PostFragment;
 import com.frite.creativevues.model.PostModel;
 import com.frite.creativevues.model.TimestampModel;
 import com.google.firebase.Timestamp;
@@ -37,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
                     ArrayList<PostModel> result = new ArrayList<>();
 
-                    if (value != null) {
-                        value.getDocuments().forEach(document -> {
-                            PostModel post = createPost(document);
-                            result.add(post);
-                        });
-                    }
+                    if (value == null) return;
+
+                    value.getDocuments().forEach(document -> {
+                        PostModel post = createPost(document);
+                        result.add(post);
+                    });
 
                     PostFragment postFragment = new PostFragment();
                     postFragment.setPosts(result);

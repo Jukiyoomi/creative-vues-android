@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
-            android:name="com.frite.creativevues.HeaderFragment"
+            android:name="com.frite.creativevues.fragment.HeaderFragment"
             android:id="@+id/header_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

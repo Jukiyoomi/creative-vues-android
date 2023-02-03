@@ -6,8 +6,8 @@
 		android:layout_height="match_parent"
 		tools:context=".AuthActivity">
 
-	<fragment
-			android:name="com.frite.creativevues.HeaderFragment"
+	<androidx.fragment.app.FragmentContainerView
+			android:name="com.frite.creativevues.fragment.HeaderFragment"
 			android:id="@+id/header_fragment"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -34,20 +34,6 @@
 				app:layout_constraintTop_toTopOf="parent"
 				app:layout_constraintEnd_toEndOf="parent"
 				android:id="@+id/textView" />
-
-		<!--<com.google.android.gms.common.SignInButton
-				android:id="@+id/auth_btn"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Sign in with Google"
-				android:paddingHorizontal="20dp"
-				android:background="@drawable/custom_button_outline"
-				android:textColor="@color/green"
-				android:drawableLeft="@drawable/icons_google"
-				app:layout_constraintBottom_toBottomOf="parent"
-				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@+id/textView" />-->
 
 		<com.google.android.gms.common.SignInButton
 				android:id="@+id/auth_btn"
