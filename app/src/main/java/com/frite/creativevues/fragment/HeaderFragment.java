@@ -1,4 +1,4 @@
-package com.frite.creativevues;
+package com.frite.creativevues.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.frite.creativevues.AuthActivity;
+import com.frite.creativevues.MainActivity;
+import com.frite.creativevues.ProfileActivity;
+import com.frite.creativevues.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

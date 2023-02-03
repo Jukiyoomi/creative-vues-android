@@ -6,8 +6,8 @@
 		android:layout_height="match_parent"
 		tools:context=".ProfileActivity">
 
-	<fragment
-			android:name="com.frite.creativevues.HeaderFragment"
+	<androidx.fragment.app.FragmentContainerView
+			android:name="com.frite.creativevues.fragment.HeaderFragment"
 			android:id="@+id/header_fragment"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"

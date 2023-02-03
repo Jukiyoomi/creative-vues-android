@@ -1,4 +1,4 @@
-package com.frite.creativevues;
+package com.frite.creativevues.fragment;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.frite.creativevues.R;
 import com.frite.creativevues.adapter.PostAdapter;
 import com.frite.creativevues.model.PostModel;
 
