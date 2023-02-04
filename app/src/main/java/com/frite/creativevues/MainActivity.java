@@ -12,6 +12,7 @@ import com.frite.creativevues.model.PostModel;
 import com.frite.creativevues.model.TimestampModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         firestore.getDb()
                 .collection("posts")
+                .orderBy("timestamp", Query.Direction.DESCENDING)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         Toast.makeText(this, "Error while loading posts", Toast.LENGTH_SHORT).show();
