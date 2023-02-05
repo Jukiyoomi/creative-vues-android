@@ -8,4 +8,7 @@
 	<string name="avatar">avatar</string>
 	<string name="default_comments">0 comments</string>
 	<string name="likes_icon">likes_icon</string>
+	<string name="your_posts">Your posts</string>
+	<string name="logout">Logout</string>
+	<string name="no_posts">You have no posts yet. Start making one :)</string>
 </resources>

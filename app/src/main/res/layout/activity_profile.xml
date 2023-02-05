@@ -22,7 +22,7 @@
 			app:layout_constraintTop_toBottomOf="@+id/header_fragment"
 			android:layout_marginTop="20dp"
 			android:paddingHorizontal="20dp"
-			android:id="@+id/constraintLayout2">
+			android:id="@+id/banner">
 
 		<TextView
 				android:layout_width="wrap_content"
@@ -51,12 +51,20 @@
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
 	<FrameLayout
-			android:id="@+id/post_fragment_container"
+			android:id="@+id/my_post_fragment_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintLeft_toLeftOf="parent"
-			app:layout_constraintRight_toRightOf="parent"
-			app:layout_constraintTop_toTopOf="parent" />
+			app:layout_constraintTop_toBottomOf="@+id/header_fragment"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent" />
+
+	<FrameLayout
+			android:id="@+id/no_posts_fragment"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			tools:layout="@layout/fragment_no_posts"
+			app:layout_constraintTop_toBottomOf="@+id/banner"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
