@@ -21,11 +21,13 @@ public class TimestampModel {
         DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
                 .withLocale(Locale.FRANCE);
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+                .withLocale(Locale.FRANCE);
 
         ZonedDateTime dateTime = new Timestamp(this.seconds * 1000).toInstant()
                 .atZone(ZoneId.systemDefault());
 
-        return dateTime.format(formatter).split(",")[0];
+        return dateTime.format(formatter);
     }
 
     public long getSeconds() {
