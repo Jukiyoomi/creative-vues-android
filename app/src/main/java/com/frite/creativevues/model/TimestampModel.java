@@ -18,11 +18,10 @@ public class TimestampModel {
     }
 
     public String toDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
-                .withLocale(Locale.FRANCE);
+        Locale deviceLocale = Locale.getDefault().getLanguage().equals("fr") ? Locale.FRENCH : Locale.ENGLISH;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-                .withLocale(Locale.FRANCE);
+                .withLocale(deviceLocale);
 
         ZonedDateTime dateTime = new Timestamp(this.seconds * 1000).toInstant()
                 .atZone(ZoneId.systemDefault());
