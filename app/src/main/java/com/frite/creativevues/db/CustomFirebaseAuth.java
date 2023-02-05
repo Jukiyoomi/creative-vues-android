@@ -49,6 +49,10 @@ public class CustomFirebaseAuth {
         }
     }
 
+    public void logout() {
+        this.mAuth.signOut();
+    }
+
     private void checkCredential(AuthCredential authCredential, Context context, Runnable callback) {
         this.mAuth.signInWithCredential(authCredential)
                 .addOnCompleteListener(task -> {
