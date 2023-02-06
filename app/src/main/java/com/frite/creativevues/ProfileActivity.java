@@ -13,15 +13,10 @@ import com.frite.creativevues.db.DBProvider;
 import com.frite.creativevues.fragment.NoPostsFragment;
 import com.frite.creativevues.fragment.PostFragment;
 import com.frite.creativevues.model.PostModel;
-import com.frite.creativevues.model.TimestampModel;
-import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentSnapshot;
+
 import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = "ProfileActivity";
@@ -55,8 +50,6 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-                    ArrayList<PostModel> result = new ArrayList<>();
-
                     if (value == null) return;
 
                     if (value.isEmpty()) {
@@ -65,8 +58,10 @@ public class ProfileActivity extends AppCompatActivity {
                         return;
                     }
 
+                    ArrayList<PostModel> result = new ArrayList<>();
+
                     value.getDocuments().forEach(document -> {
-                        PostModel post = createPost(document);
+                        PostModel post = PostModel.createPost(document);
                         result.add(post);
                     });
 
@@ -78,29 +73,5 @@ public class ProfileActivity extends AppCompatActivity {
                     transaction.commit();
                     Toast.makeText(this, "Posts loaded", Toast.LENGTH_SHORT).show();
                 });
-    }
-
-    private PostModel createPost(DocumentSnapshot document) {
-        PostModel post = new PostModel(document.getId());
-        post.setText(Objects.requireNonNull(document.get("text")).toString());
-        post.setAvatar(Objects.requireNonNull(document.get("avatar")).toString());
-        post.setUsername(Objects.requireNonNull(document.get("username")).toString());
-        post.setModified(Objects.requireNonNull((Boolean) document.get("modified")));
-        post.setUser(Objects.requireNonNull(document.get("user")).toString());
-
-        Timestamp postTimestamp = (Timestamp) Objects.requireNonNull(document.get("timestamp"));
-
-        post.setDate(new TimestampModel(postTimestamp));
-
-        // Convert likes into string, then split it and remove square brackets
-        List<String> likes = Arrays.asList(
-                Objects.requireNonNull(document.get("likes"))
-                        .toString()
-                        .replace("[", "")
-                        .replace("]", "")
-                        .split(", ")
-        );
-        post.setLikes(likes);
-        return post;
     }
 }
