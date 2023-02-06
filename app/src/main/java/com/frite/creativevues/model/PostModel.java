@@ -1,8 +1,12 @@
 package com.frite.creativevues.model;
 
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentSnapshot;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class PostModel {
     private final String id;
@@ -78,5 +82,29 @@ public class PostModel {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public static PostModel createPost(DocumentSnapshot document) {
+        PostModel post = new PostModel(document.getId());
+        post.setText(Objects.requireNonNull(document.get("text")).toString());
+        post.setAvatar(Objects.requireNonNull(document.get("avatar")).toString());
+        post.setUsername(Objects.requireNonNull(document.get("username")).toString());
+        post.setModified(Objects.requireNonNull((Boolean) document.get("modified")));
+        post.setUser(Objects.requireNonNull(document.get("user")).toString());
+
+        Timestamp postTimestamp = (Timestamp) Objects.requireNonNull(document.get("timestamp"));
+
+        post.setDate(new TimestampModel(postTimestamp));
+
+        // Convert likes into string, then split it and remove square brackets
+        List<String> likes = Arrays.asList(
+                Objects.requireNonNull(document.get("likes"))
+                        .toString()
+                        .replace("[", "")
+                        .replace("]", "")
+                        .split(", ")
+        );
+        post.setLikes(likes);
+        return post;
     }
 }
