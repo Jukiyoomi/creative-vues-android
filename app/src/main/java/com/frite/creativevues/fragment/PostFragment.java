@@ -16,20 +16,10 @@ import com.frite.creativevues.model.PostModel;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PostFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PostFragment extends Fragment {
-
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     private ArrayList<PostModel> posts;
-    private String mParam1;
-    private String mParam2;
+
+    private boolean onEditMode;
 
     public PostFragment() {
         // Required empty public constructor
@@ -52,13 +42,10 @@ public class PostFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -67,7 +54,7 @@ public class PostFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_post, container, false);
 
-        ArrayList<PostModel> posts = new ArrayList<>();
+        RecyclerView recyclerView = view.findViewById(R.id.all_posts);
 
         for (int i = 0; i < 5; i++) {
             posts.add(new PostModel("This is a test post" + i));
