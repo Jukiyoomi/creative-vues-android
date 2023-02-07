@@ -1,5 +1,6 @@
 package com.frite.creativevues.db;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class DBProvider {
@@ -17,5 +18,9 @@ public class DBProvider {
 
     public static DBProvider getInstance() {
         return instance;
+    }
+
+    public Timestamp getTimestamp() {
+        return Timestamp.now();
     }
 }
