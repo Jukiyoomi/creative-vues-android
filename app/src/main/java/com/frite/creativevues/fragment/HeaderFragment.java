@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.frite.creativevues.AuthActivity;
 import com.frite.creativevues.MainActivity;
+import com.frite.creativevues.NewPostActivity;
 import com.frite.creativevues.ProfileActivity;
 import com.frite.creativevues.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -97,6 +98,11 @@ public class HeaderFragment extends Fragment {
 
         joinBtn.setOnClickListener(authView -> {
             Intent i = new Intent(getActivity(), AuthActivity.class);
+            startActivity(i);
+        });
+
+        postBtn.setOnClickListener(postView -> {
+            Intent i = new Intent(getActivity(), NewPostActivity.class);
             startActivity(i);
         });
 
