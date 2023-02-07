@@ -45,9 +45,6 @@ public class MainActivity extends AppCompatActivity {
                         result.add(post);
                     });
 
-                    PostFragment postFragment = new PostFragment();
-                    postFragment.setPosts(result);
-
                     commitFragment(result);
                     Toast.makeText(this, "Posts loaded", Toast.LENGTH_SHORT).show();
                 });
