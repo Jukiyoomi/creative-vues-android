@@ -22,8 +22,6 @@ import java.util.ArrayList;
 public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = "ProfileActivity";
 
-    private Button logoutButton;
-
     private boolean isTransactionSafe = false;
 
     @Override

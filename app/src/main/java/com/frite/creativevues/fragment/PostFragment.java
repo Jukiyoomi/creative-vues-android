@@ -2,6 +2,7 @@ package com.frite.creativevues.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.frite.creativevues.R;
 import com.frite.creativevues.adapter.PostAdapter;
@@ -20,6 +22,8 @@ public class PostFragment extends Fragment {
     private ArrayList<PostModel> posts;
 
     private boolean onEditMode;
+
+    ImageView trash_btn;
 
     public PostFragment() {
         // Required empty public constructor
@@ -52,6 +56,13 @@ public class PostFragment extends Fragment {
         recyclerView.setLayoutManager(llm);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        if(this.onEditMode) {
+            trash_btn = view.findViewById(R.id.btn_delete);
+        }
     }
 
     public ArrayList<PostModel> getPosts() {
