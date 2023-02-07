@@ -4,39 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.frite.creativevues.R;
 import com.frite.creativevues.model.PostModel;
 
 import java.util.ArrayList;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
-    private Context context;
+public class PostAdapter extends RecyclerView.Adapter<ViewHolder> {
+    private final Context context;
     private final int layoutId;
     private final ArrayList<PostModel> posts;
 
-        class ViewHolder extends RecyclerView.ViewHolder {
-            public ImageView avatar;
-            public TextView text;
-            public TextView username;
-            public TextView likes;
-            public TextView date;
 
-            public ViewHolder(View view) {
-                super(view);
-                this.avatar = view.findViewById(R.id.post_avatar);
-                this.text = view.findViewById(R.id.post_text);
-                this.username = view.findViewById(R.id.post_username);
-                this.likes = view.findViewById(R.id.post_likes);
-                this.date = view.findViewById(R.id.post_date);
-            }
-        }
 
     public PostAdapter(int layoutId, ArrayList<PostModel> posts, Context context) {
         this.layoutId = layoutId;
