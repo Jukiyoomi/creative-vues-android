@@ -36,16 +36,29 @@
 				android:text="@string/post_title"
 				android:textAlignment="center"/>
 
-		<EditText
-				android:id="@+id/post_textarea"
+		<LinearLayout
 				android:layout_width="match_parent"
-				android:layout_height="100dp"
-				android:background="@drawable/textarea_rounded"
-				android:hint="@string/tell_us"
-				android:padding="15dp"
-				android:textColorHint="@android:color/white"
+				android:layout_height="wrap_content"
 				android:layout_marginVertical="10dp"
-				android:inputType="textShortMessage" />
+				android:orientation="vertical">
+
+			<EditText
+					android:id="@+id/post_textarea"
+					android:layout_width="match_parent"
+					android:layout_height="100dp"
+					android:background="@drawable/textarea_rounded"
+					android:textColor="@android:color/white"
+					android:inputType="textMultiLine"
+					android:singleLine="false"
+					android:padding="15dp"
+					android:importantForAutofill="no"
+					tools:ignore="LabelFor" />
+
+			<TextView
+					android:id="@+id/post_count"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+		</LinearLayout>
 
 		<Button
 				android:id="@+id/submit_post_btn"
