@@ -61,8 +61,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.text.setText(currentPost.getText());
         holder.username.setText(currentPost.getUsername());
         holder.date.setText(currentPost.getDate().toDate());
-        holder.likes.setText(String.valueOf(currentPost.getLikes().size()));
 
+        if(holder.likes != null) {
+            holder.likes.setText(String.valueOf(currentPost.getLikes().size()));
+        }
     }
 
     @Override

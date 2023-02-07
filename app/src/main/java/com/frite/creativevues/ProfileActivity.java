@@ -1,6 +1,7 @@
 package com.frite.creativevues;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
@@ -23,12 +24,14 @@ public class ProfileActivity extends AppCompatActivity {
 
     private Button logoutButton;
 
+    private boolean isTransactionSafe = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        logoutButton = (Button) findViewById(R.id.logout_btn);
+        Button logoutButton = findViewById(R.id.logout_btn);
 
         logoutButton.setOnClickListener(v -> {
             CustomFirebaseAuth.getInstance().logout();
@@ -48,14 +51,10 @@ public class ProfileActivity extends AppCompatActivity {
                         Toast.makeText(this, "Error while loading posts", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
                     if (value == null) return;
 
                     if (value.isEmpty()) {
-                        transaction.replace(R.id.no_posts_fragment, new NoPostsFragment());
-                        transaction.commit();
-                        return;
+                        commitFragment(R.id.no_posts_fragment, new NoPostsFragment());
                     }
 
                     ArrayList<PostModel> result = new ArrayList<>();
@@ -65,13 +64,30 @@ public class ProfileActivity extends AppCompatActivity {
                         result.add(post);
                     });
 
-                    PostFragment postFragment = new PostFragment();
-                    postFragment.setPosts(result);
-
-                    transaction.replace(R.id.my_post_fragment_container, postFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+                    commitFragment(R.id.my_post_fragment_container, new PostFragment(result, true));
                     Toast.makeText(this, "Posts loaded", Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isTransactionSafe = true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isTransactionSafe = false;
+    }
+
+    private void commitFragment(int layout, Fragment fragment) {
+        if (isTransactionSafe) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.replace(layout, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 }
