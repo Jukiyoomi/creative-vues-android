@@ -6,14 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.frite.creativevues.db.CustomFirebaseAuth;
 import com.frite.creativevues.db.DBProvider;
+import com.frite.creativevues.service.PostService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,23 +69,10 @@ public class NewPostActivity extends AppCompatActivity {
                 data.put("likes", new ArrayList<>());
                 data.put("timestamp", DBProvider.getInstance().getTimestamp());
 
-                try {
-                    DBProvider.getInstance().getDb()
-                            .collection("posts")
-                            .add(data)
-                            .addOnSuccessListener(documentReference -> {
-                                Log.d(TAG, "Post written successfully !");
-                                Toast.makeText(NewPostActivity.this, "Post written successfully !", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(NewPostActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            })
-                            .addOnFailureListener(e -> {
-                                Log.d(TAG, "Error adding document", e);
-                                Toast.makeText(NewPostActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    PostService.getInstance(NewPostActivity.this).createPost(data, () -> {
+                        Intent intent = new Intent(NewPostActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    });
             }
         });
     }
