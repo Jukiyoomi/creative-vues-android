@@ -15,6 +15,7 @@ class ViewHolder extends RecyclerView.ViewHolder {
     public TextView likes;
     public TextView date;
     public ImageView trashBtn;
+    public ImageView likeBtn;
 
     public ViewHolder(View view) {
         super(view);
@@ -24,5 +25,6 @@ class ViewHolder extends RecyclerView.ViewHolder {
         this.likes = view.findViewById(R.id.post_likes);
         this.date = view.findViewById(R.id.post_date);
         this.trashBtn = view.findViewById(R.id.btn_delete);
+        this.likeBtn = view.findViewById(R.id.btn_like);
     }
 }
