@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.frite.creativevues.db.DBProvider;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PostService {
@@ -22,6 +23,7 @@ public class PostService {
        if (instance == null) {
           instance = new PostService(ctx);
        }
+
         return instance;
     }
 
@@ -44,5 +46,17 @@ public class PostService {
 
     public void deletePost(String id) {
         DBProvider.getInstance().getDb().collection("posts").document(id).delete();
+    }
+
+    public void likePost(String postId, String userId, ArrayList<String> likes) {
+        if(this.isLiked(userId, likes))
+            likes.remove(userId);
+        else
+            likes.add(userId);
+        DBProvider.getInstance().getDb().collection("posts").document(postId).update("likes", likes);
+    }
+
+    public boolean isLiked(String userId, ArrayList<String> likes) {
+        return likes.contains(userId);
     }
 }
