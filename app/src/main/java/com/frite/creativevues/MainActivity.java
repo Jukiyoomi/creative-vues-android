@@ -1,12 +1,14 @@
 package com.frite.creativevues;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.frite.creativevues.db.DBProvider;
+import com.frite.creativevues.fragment.NoPostsFragment;
 import com.frite.creativevues.fragment.PostFragment;
 import com.frite.creativevues.model.PostModel;
 
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
                     if (value == null) return;
 
+                    if (value.isEmpty()) {
+                        commitFragment(R.id.no_posts_fragment, new NoPostsFragment());
+                    }
 
                     ArrayList<PostModel> result = new ArrayList<>();
 
@@ -45,10 +50,7 @@ public class MainActivity extends AppCompatActivity {
                         result.add(post);
                     });
 
-                    PostFragment postFragment = new PostFragment();
-                    postFragment.setPosts(result);
-
-                    commitFragment(result);
+                    commitFragment(R.id.post_fragment_container, new PostFragment(result, false));
                     Toast.makeText(this, "Posts loaded", Toast.LENGTH_SHORT).show();
                 });
     }
@@ -65,16 +67,13 @@ public class MainActivity extends AppCompatActivity {
         isTransactionSafe = false;
     }
 
-    private void commitFragment(ArrayList<PostModel> result) {
+    private void commitFragment(int layout, Fragment fragment) {
         if (isTransactionSafe) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            PostFragment postFragment = new PostFragment();
-            postFragment.setPosts(result);
 
-            transaction.replace(R.id.post_fragment_container, postFragment);
+            transaction.replace(layout, fragment);
             transaction.addToBackStack(null);
             transaction.commit();
         }
-
     }
 }

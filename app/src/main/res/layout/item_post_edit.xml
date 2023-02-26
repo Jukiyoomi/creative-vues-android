@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingHorizontal="20dp"
+		android:paddingVertical="10dp"
+		android:id="@+id/post_edit_item"
+		android:background="@drawable/shadow_post">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/post_header"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/constraintLayout"
+
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintTop_toTopOf="parent">
+
+			<ImageView
+					android:layout_width="50dp"
+					android:layout_height="50dp"
+					android:id="@+id/post_avatar"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					android:contentDescription="@string/avatar" />
+
+			<TextView
+					android:id="@+id/post_username"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="10dp"
+					app:layout_constraintStart_toEndOf="@+id/post_avatar"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintEnd_toEndOf="parent" />
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+		<TextView
+				android:id="@+id/post_date"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+	<TextView
+			android:id="@+id/post_text"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:textColor="@android:color/black"
+			android:layout_marginVertical="16dp"/>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="5dp">
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/default_comments"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintBottom_toBottomOf="parent"
+				android:id="@+id/textView2" />
+
+
+		<LinearLayout
+				android:id="@+id/delete_layout"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintBottom_toBottomOf="parent">
+			<ImageView
+					android:id="@+id/btn_delete"
+					android:layout_width="24dp"
+					android:layout_height="24dp"
+					android:src="@drawable/trash"
+					android:contentDescription="@string/delete_icon" />
+		</LinearLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

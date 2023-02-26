@@ -2,6 +2,7 @@ package com.frite.creativevues.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,21 +26,9 @@ public class PostFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment post_fragment.
-     */
-    public static PostFragment newInstance(String param1, String param2) {
-        PostFragment fragment = new PostFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public PostFragment(ArrayList<PostModel> posts, boolean onEditMode) {
+        this.posts = posts;
+        this.onEditMode = onEditMode;
     }
 
 
@@ -56,17 +45,17 @@ public class PostFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.all_posts);
 
-        for (int i = 0; i < 5; i++) {
-            posts.add(new PostModel("This is a test post" + i));
-        }
-
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.all_posts);
-        recyclerView.setAdapter(new PostAdapter(R.layout.item_post, this.posts, getContext()));
+        recyclerView.setAdapter(new PostAdapter(this.posts, getContext(), this.onEditMode));
 
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(llm);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     public ArrayList<PostModel> getPosts() {

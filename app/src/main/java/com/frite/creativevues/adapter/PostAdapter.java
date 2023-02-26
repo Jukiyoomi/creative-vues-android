@@ -1,6 +1,7 @@
 package com.frite.creativevues.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.frite.creativevues.R;
 import com.frite.creativevues.model.PostModel;
+import com.frite.creativevues.service.PostService;
 
 import java.util.ArrayList;
 
@@ -18,12 +21,13 @@ public class PostAdapter extends RecyclerView.Adapter<ViewHolder> {
     private final int layoutId;
     private final ArrayList<PostModel> posts;
 
+    private boolean isEditMode;
 
-
-    public PostAdapter(int layoutId, ArrayList<PostModel> posts, Context context) {
-        this.layoutId = layoutId;
+    public PostAdapter(ArrayList<PostModel> posts, Context context, boolean isEditMode) {
         this.posts = posts;
         this.context = context;
+        this.isEditMode = isEditMode;
+        this.layoutId = isEditMode ? R.layout.item_post_edit : R.layout.item_post;
     }
 
     @NonNull
@@ -43,8 +47,17 @@ public class PostAdapter extends RecyclerView.Adapter<ViewHolder> {
         holder.text.setText(currentPost.getText());
         holder.username.setText(currentPost.getUsername());
         holder.date.setText(currentPost.getDate().toDate());
-        holder.likes.setText(String.valueOf(currentPost.getLikes().size()));
 
+        if(this.isEditMode) {
+            holder.trashBtn.setOnClickListener(v -> {
+                Log.d("DELETE", "onBindViewHolder: " + currentPost.getText());
+                PostService.getInstance(this.context).deletePost(currentPost.getId());
+            });
+        } else {
+            if(holder.likes != null) {
+                holder.likes.setText(String.valueOf(currentPost.getLikes().size()));
+            }
+        }
     }
 
     @Override
