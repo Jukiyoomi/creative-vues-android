@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.frite.creativevues.R;
+import com.frite.creativevues.db.CustomFirebaseAuth;
 import com.frite.creativevues.model.PostModel;
 import com.frite.creativevues.service.PostService;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,9 +28,9 @@ public class PostAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private final boolean isEditMode;
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    CustomFirebaseAuth mAuth = CustomFirebaseAuth.getInstance();
 
-    String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+    String userId = mAuth.isLogged() ? mAuth.getUser().getUid() : "";
 
     public PostAdapter(ArrayList<PostModel> posts, Context context, boolean isEditMode) {
         this.posts = posts;

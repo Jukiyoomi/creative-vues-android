@@ -18,7 +18,7 @@ import com.frite.creativevues.MainActivity;
 import com.frite.creativevues.NewPostActivity;
 import com.frite.creativevues.ProfileActivity;
 import com.frite.creativevues.R;
-import com.google.firebase.auth.FirebaseAuth;
+import com.frite.creativevues.db.CustomFirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class HeaderFragment extends Fragment {
@@ -27,7 +27,7 @@ public class HeaderFragment extends Fragment {
     Button joinBtn;
     Button postBtn;
     ImageView avatar;
-    FirebaseAuth mAuth;
+    CustomFirebaseAuth mAuth;
 
     public HeaderFragment() {
         // Required empty public constructor
@@ -74,10 +74,10 @@ public class HeaderFragment extends Fragment {
             startActivity(i);
         });
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = CustomFirebaseAuth.getInstance();
 
         // Initialize firebase user
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        FirebaseUser firebaseUser = mAuth.getUser();
 
         // Check condition
         if(firebaseUser != null) {
