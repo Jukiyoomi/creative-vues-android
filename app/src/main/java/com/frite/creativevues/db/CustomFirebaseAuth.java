@@ -64,4 +64,8 @@ public class CustomFirebaseAuth {
                         }
                     });
     }
+
+    public boolean isLogged() {
+        return this.mAuth.getCurrentUser() != null;
+    }
 }
